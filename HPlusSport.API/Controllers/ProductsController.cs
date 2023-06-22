@@ -30,12 +30,24 @@ namespace HPlusSport.API.Controllers
         {
             var product = await _context.Products.FindAsync(id);
 
-            if(product == null)
+            if (product == null)
             {
                 return NotFound();
             }
 
             return Ok(product);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> PostProduct(Product product)
+        {
+            _context.Products.Add(product);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(
+                "GetProduct",
+                new { id = product.Id },
+                product);
         }
     }
 }
