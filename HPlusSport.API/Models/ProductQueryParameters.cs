@@ -7,5 +7,7 @@
 
         public string Name { get; set; } = string.Empty;
         public string Sku { get; set; } = string.Empty;
+
+        public string SearchTerm { get; set; } = string.Empty;
     }
 }
