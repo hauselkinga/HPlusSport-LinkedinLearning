@@ -13,7 +13,7 @@
 
         fetch(url)
             .then(response => response.json())
-            .then(data => data.showProducts())
+            .then(data => showProducts(data))
             .catch(ex => {
                 alert("Error!");
                 console.error(ex);
