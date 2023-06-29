@@ -39,7 +39,7 @@ namespace HPlusSport.Web.Controllers
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("test secret"));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("not so secret test secret"));
 
             var tokenDescriptor = new SecurityTokenDescriptor()
             {
