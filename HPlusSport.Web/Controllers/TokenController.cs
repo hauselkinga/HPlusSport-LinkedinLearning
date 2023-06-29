@@ -1,4 +1,6 @@
 ﻿using HPlusSport.Web.Areas.Identity.Data;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -53,6 +55,19 @@ namespace HPlusSport.Web.Controllers
                 token = tokenHandler.WriteToken(token),
                 expires = token.ValidTo
             });
+        }
+
+        [HttpGet]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Route("products")]
+        public async Task<ActionResult> GetProducts()
+        {
+            var httpClient = new HttpClient();
+
+            var response = await httpClient.GetAsync("https://localhost:7221/products");
+            var data = await response.Content.ReadAsStringAsync();
+
+            return Ok(data);
         }
     }
 }
